@@ -96,3 +96,21 @@ export async function requireAuthenticatedUser() {
     throw err instanceof Error ? err : new Error('Não autorizado')
   }
 }
+
+export async function requireAdminFromRequest(request: NextRequest) {
+  const user = await getUserFromRequest(request)
+  if (!user) {
+    logger.warn('[supabase:server] rota admin chamada sem usuário autenticado', {
+      path: request.nextUrl?.pathname,
+    })
+    return null
+  }
+  if (user.app_metadata?.role !== 'admin') {
+    logger.warn('[supabase:server] rota admin chamada por usuário não-admin', {
+      userId: user.id,
+      path: request.nextUrl?.pathname,
+    })
+    return null
+  }
+  return user
+}

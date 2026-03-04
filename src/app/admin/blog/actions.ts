@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { BlogService } from '@/services/blogService'
 import { getSupabaseAdmin } from '@/lib/supabase'
 import { requireAuthenticatedUser } from '@/lib/supabase-server'
+import { sanitizeBlogHtml } from '@/lib/sanitize-blog-html'
 import type { Category, Post, Tag } from '@/types/blog'
 import logger from '@/lib/logger'
 
@@ -147,7 +148,7 @@ export async function createPostAction(formData: FormData) {
       {
         title: parsed.title,
         slug: parsed.slug,
-        content: parsed.content,
+        content: sanitizeBlogHtml(parsed.content),
         excerpt: parsed.excerpt,
         cover_image: parsed.cover_image || undefined,
         status: parsed.status,
@@ -182,7 +183,7 @@ export async function updatePostAction(postId: string, formData: FormData) {
       id: postId,
       title: parsed.title,
       slug: parsed.slug,
-      content: parsed.content,
+      content: sanitizeBlogHtml(parsed.content),
       excerpt: parsed.excerpt,
       cover_image: parsed.cover_image || undefined,
       status: parsed.status,

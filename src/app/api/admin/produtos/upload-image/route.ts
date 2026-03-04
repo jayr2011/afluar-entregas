@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto'
 import { NextRequest, NextResponse } from 'next/server'
 import { getSupabaseAdmin } from '@/lib/supabase'
-import { getUserFromRequest } from '@/lib/supabase-server'
+import { requireAdminFromRequest } from '@/lib/supabase-server'
 import { rateLimiters, withRateLimit } from '@/lib/rate-limit'
 import logger from '@/lib/logger'
 
@@ -33,7 +33,7 @@ function resolveCardapioFolder(categoria?: string): 'bebidas' | 'pratos' {
 }
 
 export async function POST(request: NextRequest) {
-  const user = await getUserFromRequest(request)
+  const user = await requireAdminFromRequest(request)
 
   if (!user) {
     logger.warn(`${LOG_PREFIX} tentativa sem autenticação`)

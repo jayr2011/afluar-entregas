@@ -1,4 +1,5 @@
 import { getCachedPostBySlug, getCachedPosts } from '@/services/blogService'
+import { sanitizeBlogHtml } from '@/lib/sanitize-blog-html'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -113,7 +114,7 @@ async function BlogPostPageContent({ params }: PageProps) {
         </header>
 
         <div className="prose prose-lg max-w-none mb-12">
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          <div dangerouslySetInnerHTML={{ __html: sanitizeBlogHtml(post.content) }} />
         </div>
 
         <div className="flex flex-wrap gap-2 mb-8">

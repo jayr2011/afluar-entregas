@@ -137,17 +137,15 @@ export async function POST(request: NextRequest) {
       description: `Pedido - ${validatedForm.nome}`,
     }
 
-    logger.debug('[process-payment] Dados do pagamento:', JSON.stringify(paymentData).slice(0, 500))
-    logger.debug(
-      '[process-payment] transaction_amount:',
-      paymentData.transaction_amount,
-      typeof paymentData.transaction_amount
-    )
-    logger.debug(
-      '[process-payment] issuer_id:',
-      paymentData.issuer_id,
-      typeof paymentData.issuer_id
-    )
+    const safeLog = {
+      transaction_amount: paymentData.transaction_amount,
+      payment_method_id: paymentData.payment_method_id,
+      installments: paymentData.installments,
+      payer_email_domain: paymentData.payer?.email?.includes('@')
+        ? paymentData.payer.email.split('@')[1]
+        : null,
+    }
+    logger.debug('[process-payment] Dados do pagamento (sanitizado):', safeLog)
 
     result = (await paymentClient.create({
       body: paymentData,

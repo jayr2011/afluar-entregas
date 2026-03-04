@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { ProdutosService } from '@/services/productsService'
 import { getCachedDestaques } from '@/services/productsService'
-import { getUserFromRequest } from '@/lib/supabase-server'
+import { requireAdminFromRequest } from '@/lib/supabase-server'
 import { getSupabaseAdmin } from '@/lib/supabase'
 import logger from '@/lib/logger'
 import { z } from 'zod'
@@ -64,7 +64,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const user = await getUserFromRequest(request)
+  const user = await requireAdminFromRequest(request)
   if (!user) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
   }
