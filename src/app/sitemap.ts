@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import logger from '@/lib/logger'
 import { getSupabaseAdmin } from '@/lib/supabase'
+import { getMultipleFeatureToggles } from '@/lib/feature-toggles'
 
 interface SitemapProduto {
   id: string
@@ -32,7 +33,7 @@ function isKnownPrerenderFetchError(message: string): boolean {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://afluar.com.br'
+  const baseUrl = 'https://afluar-entregas.vercel.app'
   const db = getSupabaseAdmin()
 
   const fetchProdutos = async (): Promise<SitemapProduto[]> => {
@@ -68,7 +69,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  const [produtos, posts] = await Promise.all([fetchProdutos(), fetchPosts()])
+  const [produtos, posts, toggles] = await Promise.all([
+    fetchProdutos(),
+    fetchPosts(),
+    getMultipleFeatureToggles(['eventos_enabled', 'beach_tennis_enabled']).catch(() => ({
+      eventos_enabled: false,
+      beach_tennis_enabled: false,
+    })),
+  ])
 
   const productUrls = produtos.map(produto => ({
     url: `${baseUrl}/cardapio/${produto.id}`,
@@ -84,7 +92,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.5,
   }))
 
-  const routes = ['', '/cardapio', '/contato', '/eventos', '/experiencia'].map(route => ({
+  const staticRoutes = ['', '/cardapio', '/contato', '/experiencia', '/blog']
+  const conditionalRoutes: string[] = []
+  if (toggles.eventos_enabled) conditionalRoutes.push('/eventos')
+  if (toggles.beach_tennis_enabled) conditionalRoutes.push('/beach-tennis')
+
+  const routes = [...staticRoutes, ...conditionalRoutes].map(route => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'daily' as const,

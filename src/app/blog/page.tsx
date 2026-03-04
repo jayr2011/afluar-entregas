@@ -7,11 +7,24 @@ import { Metadata } from 'next'
 import { Suspense } from 'react'
 
 export const metadata: Metadata = {
-  title: 'Blog - Afluar',
-  description: 'Artigos sobre culinária amazônica, receitas, eventos e muito mais.',
+  title: 'Blog Afluar | Culinária Amazônica, Receitas e Eventos em Belém',
+  description:
+    'Artigos sobre culinária amazônica, receitas paraenses, eventos em Belém e cultura da Amazônia. Conteúdo do restaurante Afluar.',
+  keywords: [
+    'blog Afluar',
+    'culinária amazônica',
+    'receitas Belém',
+    'restaurante Belém',
+    'eventos Belém',
+  ],
+  alternates: {
+    canonical: 'https://afluar-entregas.vercel.app/blog',
+  },
   openGraph: {
-    title: 'Blog - Afluar',
-    description: 'Artigos sobre culinária amazônica.',
+    title: 'Blog Afluar | Culinária Amazônica, Receitas e Eventos em Belém',
+    description:
+      'Artigos sobre culinária amazônica, receitas paraenses e cultura da Amazônia. Conteúdo do restaurante Afluar em Belém.',
+    url: 'https://afluar-entregas.vercel.app/blog',
   },
 }
 

@@ -20,16 +20,16 @@ export const metadata: Metadata = {
     'salão de eventos Belém',
   ],
   alternates: {
-    canonical: 'https://afluar.com.br/eventos',
+    canonical: 'https://afluar-entregas.vercel.app/eventos',
   },
   openGraph: {
     title: 'Eventos - Afluar | Casamentos e Eventos em Belém',
     description:
       'Realize seu evento especial com a melhor vista de Belém. Casamentos, aniversário e eventos corporativos.',
-    url: 'https://afluar.com.br/eventos',
+    url: 'https://afluar-entregas.vercel.app/eventos',
     images: [
       {
-        url: new URL('/logo/afluar.jpg', 'https://afluar.com.br').href,
+        url: new URL('/logo/afluar.jpg', 'https://afluar-entregas.vercel.app').href,
         width: 1200,
         height: 630,
         alt: 'Afluar - Eventos em Belém',

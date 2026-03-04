@@ -17,15 +17,15 @@ export const metadata: Metadata = {
     'reserva Belém',
   ],
   alternates: {
-    canonical: 'https://afluar.com.br/contato',
+    canonical: 'https://afluar-entregas.vercel.app/contato',
   },
   openGraph: {
     title: 'Contato - Afluar | Fale Conosco',
     description: 'Entre em contato conosco. WhatsApp: (91) 98590-9595',
-    url: 'https://afluar.com.br/contato',
+    url: 'https://afluar-entregas.vercel.app/contato',
     images: [
       {
-        url: new URL('/logo/afluar.jpg', 'https://afluar.com.br').href,
+        url: new URL('/logo/afluar.jpg', 'https://afluar-entregas.vercel.app').href,
         width: 1200,
         height: 630,
         alt: 'Afluar - Contato',

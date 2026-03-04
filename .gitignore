@@ -37,6 +37,9 @@ CLAUDE.md
 .DS_Store
 *.pem
 
+# agents
+.agents
+
 # debug
 npm-debug.log*
 yarn-debug.log*

@@ -22,12 +22,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!post) return {}
 
+  const description = (post.excerpt || post.content.replace(/<[^>]*>/g, '').trim()).slice(0, 160)
+  const keywords = [
+    post.title,
+    'blog Afluar',
+    'culinária amazônica',
+    ...(post.categories?.map(c => c.name) ?? []),
+  ]
+
   return {
     title: `${post.title} - Blog Afluar`,
-    description: post.excerpt || post.content.slice(0, 160),
+    description,
+    keywords,
+    alternates: {
+      canonical: `https://afluar-entregas.vercel.app/blog/${slug}`,
+    },
     openGraph: {
       title: post.title,
-      description: post.excerpt || post.content.slice(0, 160),
+      description,
       images: post.cover_image ? [{ url: post.cover_image }] : [],
       type: 'article',
       publishedTime: post.published_at,
@@ -36,7 +48,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     twitter: {
       card: 'summary_large_image',
       title: post.title,
-      description: post.excerpt || post.content.slice(0, 160),
+      description,
       images: post.cover_image ? [post.cover_image] : [],
     },
   }
@@ -78,7 +90,7 @@ async function BlogPostPageContent({ params }: PageProps) {
             {post.categories?.map(cat => (
               <Link
                 key={cat.id}
-                href={`/blog/categoria/${cat.slug}`}
+                href={`/blog?category=${cat.slug}`}
                 className="text-sm font-medium text-primary hover:underline"
               >
                 {cat.name}
@@ -121,7 +133,7 @@ async function BlogPostPageContent({ params }: PageProps) {
           {post.tags?.map(tag => (
             <Link
               key={tag.id}
-              href={`/blog/tag/${tag.slug}`}
+              href={`/blog?tag=${tag.slug}`}
               className="px-3 py-1 bg-secondary rounded-full text-sm hover:bg-secondary/80"
             >
               #{tag.name}

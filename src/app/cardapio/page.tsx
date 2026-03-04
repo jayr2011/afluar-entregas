@@ -12,7 +12,7 @@ import { EmptyState, ErrorState } from '@/components/feedback'
 export const metadata: Metadata = {
   title: 'Cardápio - Afluar | Culinária Amazônica em Belém',
   description:
-    'Conheça nosso cardápio de peixes frescos e frutos do mar. Peça online e sabore as sabores da Amazônia em Belém.',
+    'Conheça nosso cardápio de peixes frescos e frutos do mar. Peça online e saboreie os sabores da Amazônia em Belém.',
   keywords: [
     'cardápio Belém',
     'menu Amazônia',
@@ -22,15 +22,16 @@ export const metadata: Metadata = {
     'cardápio online',
   ],
   alternates: {
-    canonical: 'https://afluar.com.br/cardapio',
+    canonical: 'https://afluar-entregas.vercel.app/cardapio',
   },
   openGraph: {
     title: 'Cardápio - Afluar | Culinária Amazônica',
-    description: 'Cardápio com peixes frescos e frutos do mar da Amazônia. Peça online!',
-    url: 'https://afluar.com.br/cardapio',
+    description:
+      'Cardápio com peixes frescos e frutos do mar da Amazônia. Peça online e saboreie os sabores em Belém!',
+    url: 'https://afluar-entregas.vercel.app/cardapio',
     images: [
       {
-        url: new URL('/logo/afluar.jpg', 'https://afluar.com.br').href,
+        url: new URL('/logo/afluar.jpg', 'https://afluar-entregas.vercel.app').href,
         width: 1200,
         height: 630,
         alt: 'Cardápio Afluar - Culinária Amazônica',

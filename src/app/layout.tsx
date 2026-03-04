@@ -44,7 +44,7 @@ function NavbarFallback() {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://afluar.com.br'),
+  metadataBase: new URL('https://afluar-entregas.vercel.app'),
   title: 'Afluar - Culinária Amazônica',
   description:
     'Sabores da Amazônia em Belém: restaurante em Belém no centro histórico, vista para a Baía do Guajará. Cardápio online, delivery e pagamento pelo Mercado Pago. Peixe frescos.',
@@ -71,20 +71,20 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://afluar.com.br',
+    canonical: 'https://afluar-entregas.vercel.app',
     languages: {
-      'pt-BR': 'https://afluar.com.br',
+      'pt-BR': 'https://afluar-entregas.vercel.app',
     },
   },
   openGraph: {
     title: 'Afluar - Culinária Amazônica',
     description:
       'Restaurante à beira da Baía do Guajará, centro histórico. Cardápio online e delivery.',
-    url: 'https://afluar.com.br',
+    url: 'https://afluar-entregas.vercel.app',
     siteName: 'Afluar',
     images: [
       {
-        url: new URL('/logo/afluar.jpg', 'https://afluar.com.br').href,
+        url: new URL('/logo/afluar.jpg', 'https://afluar-entregas.vercel.app').href,
         width: 1200,
         height: 630,
         alt: 'Afluar - Restaurante de Culinária Amazônica em Belém',
@@ -97,7 +97,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Afluar - Culinária Amazônica',
     description: 'Restaurante mais requintado de Belém. Peça online!',
-    images: [new URL('/logo/afluar.jpg', 'https://afluar.com.br').href],
+    images: [new URL('/logo/afluar.jpg', 'https://afluar-entregas.vercel.app').href],
   },
 }
 
@@ -128,7 +128,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               name: 'Afluar',
               description:
                 'Restaurante de culinária amazônica em Belém do Pará. Peixes frescos, frutos do mar e pratos regionais com vista para a Baía do Guajará.',
-              url: 'https://afluar.com.br',
+              url: 'https://afluar-entregas.vercel.app',
               telephone: '+5591985909595',
               priceRange: '$$',
               servesCuisine: [
@@ -159,8 +159,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   closes: '00:00',
                 },
               ],
-              image: 'https://afluar.com.br/logo/afluar.jpg',
-              logo: 'https://afluar.com.br/logo/afluar.jpg',
+              image: 'https://afluar-entregas.vercel.app/logo/afluar.jpg',
+              logo: 'https://afluar-entregas.vercel.app/logo/afluar.jpg',
               sameAs: [
                 'https://www.instagram.com/afluar_restaurante/',
                 'https://wa.me/5591985909595',
@@ -169,7 +169,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 '@type': 'OrderAction',
                 target: {
                   '@type': 'EntryPoint',
-                  urlTemplate: 'https://afluar.com.br/cardapio',
+                  urlTemplate: 'https://afluar-entregas.vercel.app/cardapio',
                 },
                 name: 'Ver Cardápio',
               },

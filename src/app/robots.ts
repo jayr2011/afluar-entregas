@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin', '/api', '/checkout', '/carrinho', '/pedido'],
       },
     ],
-    sitemap: 'https://afluar.com.br/sitemap.xml',
+    sitemap: 'https://afluar-entregas.vercel.app/sitemap.xml',
   }
 }

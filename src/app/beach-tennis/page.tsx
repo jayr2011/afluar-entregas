@@ -9,19 +9,26 @@ import { isFeatureEnabled } from '@/lib/feature-toggles'
 
 export const metadata: Metadata = {
   title: 'Beach Tennis - Afluar | Aulas e Clínicas',
+  keywords: [
+    'beach tennis Belém',
+    'aulas beach tennis',
+    'clínica beach tennis',
+    'beach tennis Afluar',
+    'treino beach tennis Belém',
+  ],
   description:
     'Aulas e clínicas de beach tennis na Afluar com turmas para todos os níveis e treinos orientados por metodologia progressiva.',
   alternates: {
-    canonical: 'https://afluar.com.br/beach-tennis',
+    canonical: 'https://afluar-entregas.vercel.app/beach-tennis',
   },
   openGraph: {
     title: 'Beach Tennis - Afluar',
     description:
       'Treinos de beach tennis para iniciantes e avançados com estrutura completa e acompanhamento técnico.',
-    url: 'https://afluar.com.br/beach-tennis',
+    url: 'https://afluar-entregas.vercel.app/beach-tennis',
     images: [
       {
-        url: new URL('/banner/beach-tennis.png', 'https://afluar.com.br').href,
+        url: new URL('/banner/beach-tennis.png', 'https://afluar-entregas.vercel.app').href,
         width: 1200,
         height: 630,
         alt: 'Beach Tennis na Afluar',

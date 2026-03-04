@@ -14,7 +14,7 @@ interface ShareButtonsProps {
 
 export function ShareButtons({ title, url }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false)
-  const fullUrl = `https://afluar.com.br${url}`
+  const fullUrl = `https://afluar-entregas.vercel.app${url}`
   const encodedTitle = encodeURIComponent(title)
   const encodedBody = encodeURIComponent(fullUrl)
   const mailtoLink = `mailto:?subject=${encodedTitle}&body=${encodedBody}`

@@ -15,16 +15,16 @@ export const metadata: Metadata = {
     'restaurante temática Belém',
   ],
   alternates: {
-    canonical: 'https://afluar.com.br/experiencia',
+    canonical: 'https://afluar-entregas.vercel.app/experiencia',
   },
   openGraph: {
     title: 'Experiência - Afluar | Alta Gastronomia Amazônica',
     description:
       'Descubra a experiência única do Afluar. Pratos exclusivos da culinária amazônica com vista para a Baía do Guajará.',
-    url: 'https://afluar.com.br/experiencia',
+    url: 'https://afluar-entregas.vercel.app/experiencia',
     images: [
       {
-        url: new URL('/logo/afluar.jpg', 'https://afluar.com.br').href,
+        url: new URL('/logo/afluar.jpg', 'https://afluar-entregas.vercel.app').href,
         width: 1200,
         height: 630,
         alt: 'Afluar - Experiência Gastronômica',

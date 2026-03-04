@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const imageUrl = produto.imagem?.startsWith('http')
     ? produto.imagem
-    : new URL(produto.imagem || '/logo/afluar.jpg', 'https://afluar.com.br').href
+    : new URL(produto.imagem || '/logo/afluar.jpg', 'https://afluar-entregas.vercel.app').href
 
   return {
     title: `${produto.nome} | Afluar`,
@@ -31,14 +31,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       `Conheça o ${produto.nome} no cardápio do Afluar. Prato típico da culinária amazônica em Belém.`,
     keywords: [produto.nome, 'cardápio Afluar', 'culinária amazônica', 'Belém', 'delivery'],
     alternates: {
-      canonical: `https://afluar.com.br/cardapio/${id}`,
+      canonical: `https://afluar-entregas.vercel.app/cardapio/${id}`,
     },
     openGraph: {
       title: `${produto.nome} | Afluar - Culinária Amazônica`,
       description:
         produto.descricao ||
         `Conheça o ${produto.nome}, prato típico da culinária amazônica em Belém. Peça online!`,
-      url: `https://afluar.com.br/cardapio/${id}`,
+      url: `https://afluar-entregas.vercel.app/cardapio/${id}`,
       images: [
         {
           url: imageUrl,
