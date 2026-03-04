@@ -79,7 +79,10 @@ export default function Contato() {
   const ctaId = 'contato-cta'
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-background to-primary/5">
+    <main
+      className="min-h-screen bg-linear-to-b from-background to-primary/5"
+      aria-labelledby={heroId}
+    >
       <section aria-labelledby={heroId} className="relative py-20 px-4 overflow-hidden">
         <div
           className="absolute inset-0 bg-primary/5 -skew-y-3 transform origin-top-left"
@@ -88,7 +91,7 @@ export default function Contato() {
         <div className="container mx-auto max-w-4xl relative z-10">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <WhatsappIcon />
+              <WhatsappIcon aria-hidden="true" />
               Contato
             </div>
             <h1
@@ -191,7 +194,7 @@ export default function Contato() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${info.titulo}: ${info.descricao} (abre em nova janela)`}
-                    className="block bg-card rounded-xl p-6 border border-primary/10 hover:border-primary hover:shadow-lg transition-all cursor-pointer group"
+                    className="block bg-card rounded-xl p-6 border border-primary/10 hover:border-primary hover:shadow-lg transition-all cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                   >
                     {CardContent}
                   </a>
@@ -236,6 +239,6 @@ export default function Contato() {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   )
 }

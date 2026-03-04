@@ -35,13 +35,14 @@ export default function CarrinhoPage() {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-linear-to-b from-background to-primary/5">
+      <main className="min-h-screen bg-linear-to-b from-background to-primary/5">
         <div className="container mx-auto px-4 pt-4">
           <Link
             href="/cardapio"
+            aria-label="Voltar para o cardapio"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             Voltar ao cardápio
           </Link>
         </div>
@@ -56,18 +57,19 @@ export default function CarrinhoPage() {
             </Button>
           }
         />
-      </div>
+      </main>
     )
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-background to-primary/5">
+    <main className="min-h-screen bg-linear-to-b from-background to-primary/5">
       <div className="container mx-auto px-4 py-8">
         <Link
           href="/cardapio"
+          aria-label="Voltar para o cardapio"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
         >
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
           Voltar ao cardápio
         </Link>
         <CheckoutBreadcrumb currentStep="carrinho" className="mb-6" />
@@ -118,6 +120,6 @@ export default function CarrinhoPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </div>
+    </main>
   )
 }

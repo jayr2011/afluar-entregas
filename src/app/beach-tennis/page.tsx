@@ -56,15 +56,24 @@ const horarios = [
 
 export default async function BeachTennisPage() {
   const enabled = await isFeatureEnabled('beach_tennis_enabled')
+  const heroId = 'beach-tennis-hero'
+  const formatosId = 'beach-tennis-formatos'
+  const horariosId = 'beach-tennis-horarios'
 
   if (!enabled) {
     notFound()
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-background to-primary/5">
-      <section className="relative py-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-primary/5 -skew-y-3 transform origin-top-left" />
+    <main
+      className="min-h-screen bg-linear-to-b from-background to-primary/5"
+      aria-labelledby={heroId}
+    >
+      <section aria-labelledby={heroId} className="relative py-20 px-4 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-primary/5 -skew-y-3 transform origin-top-left"
+          aria-hidden="true"
+        />
 
         <div className="container mx-auto max-w-5xl relative z-10">
           <div className="text-center mb-12">
@@ -72,7 +81,10 @@ export default async function BeachTennisPage() {
               Beach Tennis
             </Badge>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight">
+            <h1
+              id={heroId}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight"
+            >
               Energia, técnica e evolução na areia
             </h1>
 
@@ -92,8 +104,11 @@ export default async function BeachTennisPage() {
         </div>
       </section>
 
-      <section className="py-16 px-4">
+      <section aria-labelledby={formatosId} className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
+          <h2 id={formatosId} className="sr-only">
+            Formatos de aula
+          </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {formatos.map(item => {
               const Icon = item.icon
@@ -104,8 +119,11 @@ export default async function BeachTennisPage() {
                   className="bg-card p-6 rounded-xl shadow-lg border border-primary/10 hover:shadow-xl transition-shadow"
                 >
                   <CardHeader className="px-0 pt-0">
-                    <div className="h-14 w-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                      <Icon className="h-7 w-7 text-primary" />
+                    <div
+                      className="h-14 w-14 bg-primary/10 rounded-full flex items-center justify-center mb-4"
+                      aria-hidden="true"
+                    >
+                      <Icon className="h-7 w-7 text-primary" aria-hidden="true" />
                     </div>
                     <CardTitle className="text-xl text-primary">{item.title}</CardTitle>
                   </CardHeader>
@@ -119,10 +137,10 @@ export default async function BeachTennisPage() {
         </div>
       </section>
 
-      <section className="py-16 px-4 bg-primary/5">
+      <section aria-labelledby={horariosId} className="py-16 px-4 bg-primary/5">
         <div className="container mx-auto max-w-4xl">
           <Card className="p-8 md:p-10 border border-primary/10 shadow-xl">
-            <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">
+            <h2 id={horariosId} className="text-2xl md:text-3xl font-bold text-primary mb-6">
               Horários disponíveis
             </h2>
             <ul className="space-y-4">
@@ -139,6 +157,6 @@ export default async function BeachTennisPage() {
           </Card>
         </div>
       </section>
-    </div>
+    </main>
   )
 }

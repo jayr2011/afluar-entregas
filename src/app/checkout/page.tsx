@@ -56,6 +56,7 @@ export default function CheckoutPage() {
   const [fieldErrors, setFieldErrors] = useState<CheckoutFormErrors>({})
   const [cepLoading, setCepLoading] = useState(false)
   const [cepError, setCepError] = useState<string | null>(null)
+  const [cepStatusMessage, setCepStatusMessage] = useState('')
 
   const totalPrice = items.reduce((sum, i) => sum + i.preco * i.quantidade, 0)
 
@@ -66,9 +67,11 @@ export default function CheckoutPage() {
     const cep = cepInput?.value?.replace(/\D/g, '') ?? ''
     if (cep.length !== 8) {
       setCepError('CEP deve ter 8 dígitos')
+      setCepStatusMessage('')
       return
     }
     setCepError(null)
+    setCepStatusMessage('Buscando CEP...')
     setCepLoading(true)
     try {
       const endereco = await getEnderecoPorCep(cep)
@@ -77,11 +80,14 @@ export default function CheckoutPage() {
         const bairroInput = form.bairro as HTMLInputElement
         if (ruaInput) ruaInput.value = endereco.logradouro
         if (bairroInput) bairroInput.value = endereco.bairro
+        setCepStatusMessage('Endereço preenchido automaticamente.')
       } else {
         setCepError('CEP não encontrado')
+        setCepStatusMessage('CEP não encontrado.')
       }
     } catch {
       setCepError('Não foi possível buscar o CEP. Tente novamente.')
+      setCepStatusMessage('Não foi possível buscar o CEP.')
     } finally {
       setCepLoading(false)
     }
@@ -112,6 +118,14 @@ export default function CheckoutPage() {
       }
       setFieldErrors(errors)
       setError(null)
+
+      const firstInvalidField = parsed.error.issues[0]?.path[0]
+      if (typeof firstInvalidField === 'string') {
+        const firstInvalidInput = form.elements.namedItem(firstInvalidField)
+        if (firstInvalidInput instanceof HTMLElement) {
+          firstInvalidInput.focus()
+        }
+      }
       return
     }
 
@@ -143,11 +157,15 @@ export default function CheckoutPage() {
 
   if (items.length === 0 && !loading) {
     return (
-      <div className="min-h-screen bg-linear-to-b from-background to-primary/5">
+      <main className="min-h-screen bg-linear-to-b from-background to-primary/5">
         <div className="container mx-auto px-4 py-8">
           <Button asChild variant="ghost" className="mb-6 -ml-2">
-            <Link href="/carrinho" className="flex items-center gap-2">
-              <ArrowLeft className="h-4 w-4" />
+            <Link
+              href="/carrinho"
+              aria-label="Voltar para o carrinho"
+              className="flex items-center gap-2"
+            >
+              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
               Voltar ao carrinho
             </Link>
           </Button>
@@ -163,17 +181,21 @@ export default function CheckoutPage() {
             }
           />
         </div>
-      </div>
+      </main>
     )
   }
 
   if (step === 'pagamento' && paymentData && checkoutFormData) {
     return (
-      <div className="min-h-screen bg-linear-to-b from-background to-primary/5">
+      <main className="min-h-screen bg-linear-to-b from-background to-primary/5">
         <div className="container mx-auto max-w-xl px-4 py-8">
           <Button asChild variant="ghost" className="mb-4 -ml-2">
-            <Link href="/carrinho" className="flex items-center gap-2">
-              <ArrowLeft className="h-4 w-4" />
+            <Link
+              href="/carrinho"
+              aria-label="Voltar para o carrinho"
+              className="flex items-center gap-2"
+            >
+              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
               Voltar ao carrinho
             </Link>
           </Button>
@@ -187,24 +209,30 @@ export default function CheckoutPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <CheckoutPaymentBrick
-                preferenceId={paymentData.preferenceId}
-                amount={paymentData.amount}
-                orderData={{ formData: checkoutFormData, cart: items }}
-              />
+              <section aria-label="Formulario de pagamento">
+                <CheckoutPaymentBrick
+                  preferenceId={paymentData.preferenceId}
+                  amount={paymentData.amount}
+                  orderData={{ formData: checkoutFormData, cart: items }}
+                />
+              </section>
             </CardContent>
           </Card>
         </div>
-      </div>
+      </main>
     )
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-background to-primary/5">
+    <main className="min-h-screen bg-linear-to-b from-background to-primary/5">
       <div className="container mx-auto max-w-xl px-4 py-8">
         <Button asChild variant="ghost" className="mb-4 -ml-2">
-          <Link href="/carrinho" className="flex items-center gap-2">
-            <ArrowLeft className="h-4 w-4" />
+          <Link
+            href="/carrinho"
+            aria-label="Voltar para o carrinho"
+            className="flex items-center gap-2"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             Voltar ao carrinho
           </Link>
         </Button>
@@ -278,7 +306,7 @@ export default function CheckoutPage() {
                     placeholder="00000-000"
                     maxLength={9}
                     aria-invalid={!!cepError}
-                    aria-describedby={cepError ? 'cep-error' : undefined}
+                    aria-describedby={cepError ? 'cep-error cep-status' : 'cep-status'}
                     className="flex-1"
                     onChange={e => {
                       const v = e.target.value.replace(/\D/g, '')
@@ -288,6 +316,7 @@ export default function CheckoutPage() {
                         e.target.value = `${v.slice(0, 5)}-${v.slice(5, 8)}`
                       }
                       setCepError(null)
+                      setCepStatusMessage('')
                     }}
                   />
                   <Button
@@ -295,12 +324,13 @@ export default function CheckoutPage() {
                     variant="secondary"
                     onClick={handleBuscarCep}
                     disabled={cepLoading}
+                    aria-label={cepLoading ? 'Buscando CEP' : 'Buscar CEP'}
                   >
                     {cepLoading ? (
                       'Buscando...'
                     ) : (
                       <>
-                        <Search className="h-4 w-4 mr-1" />
+                        <Search className="h-4 w-4 mr-1" aria-hidden="true" />
                         Buscar
                       </>
                     )}
@@ -311,6 +341,9 @@ export default function CheckoutPage() {
                     {cepError}
                   </p>
                 )}
+                <p id="cep-status" className="sr-only" aria-live="polite">
+                  {cepStatusMessage}
+                </p>
               </div>
 
               <div className="space-y-2">
@@ -396,6 +429,6 @@ export default function CheckoutPage() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </main>
   )
 }

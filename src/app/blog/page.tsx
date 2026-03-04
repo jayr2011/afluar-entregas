@@ -86,10 +86,14 @@ async function BlogPageContent({ searchParams }: PageProps) {
 }
 
 export default function BlogPage({ searchParams }: PageProps) {
+  const heroId = 'blog-hero'
+
   return (
-    <div className="container mx-auto max-w-6xl px-4 py-8">
+    <main aria-labelledby={heroId} className="container mx-auto max-w-6xl px-4 py-8">
       <header className="mb-12 text-center">
-        <h1 className="text-4xl font-bold mb-4">Blog Afluar</h1>
+        <h1 id={heroId} className="text-4xl font-bold mb-4">
+          Blog Afluar
+        </h1>
         <p className="text-muted-foreground text-lg">
           Descubra receitas, eventos e cultura amazônica
         </p>
@@ -98,6 +102,6 @@ export default function BlogPage({ searchParams }: PageProps) {
       <Suspense fallback={<BlogPageFallback />}>
         <BlogPageContent searchParams={searchParams} />
       </Suspense>
-    </div>
+    </main>
   )
 }

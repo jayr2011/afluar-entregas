@@ -45,6 +45,7 @@ export function CartItemRow({ item, onRemove, onDecreaseQty, onIncreaseQty }: Ca
           size="icon"
           className="shrink-0 h-8 w-8 -mt-1 -mr-1"
           onClick={() => onRemove?.(item.id)}
+          aria-label="Remover item"
         >
           <Trash2 className="h-4 w-4" />
         </Button>
@@ -74,6 +75,7 @@ export function CartItemRow({ item, onRemove, onDecreaseQty, onIncreaseQty }: Ca
             size="icon"
             className="h-8 w-8 shrink-0"
             onClick={() => onDecreaseQty?.(item)}
+            aria-label="Diminuir quantidade"
           >
             <Minus className="h-4 w-4" />
           </Button>
@@ -83,6 +85,7 @@ export function CartItemRow({ item, onRemove, onDecreaseQty, onIncreaseQty }: Ca
             size="icon"
             className="h-8 w-8 shrink-0"
             onClick={() => onIncreaseQty?.(item)}
+            aria-label="Aumentar quantidade"
           >
             <Plus className="h-4 w-4" />
           </Button>

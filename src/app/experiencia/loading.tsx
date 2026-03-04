@@ -3,15 +3,28 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 export default function Loading() {
   return (
-    <div className="min-h-screen bg-linear-to-b from-background to-primary/5">
+    <div
+      className="min-h-screen bg-linear-to-b from-background to-primary/5"
+      role="status"
+      aria-live="polite"
+      aria-busy="true"
+      aria-label="Carregando página de experiência"
+    >
+      <span className="sr-only">Carregando página de experiência</span>
       <section className="relative py-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-primary/5 -skew-y-3 transform origin-top-left" />
+        <div
+          className="absolute inset-0 bg-primary/5 -skew-y-3 transform origin-top-left"
+          aria-hidden="true"
+        />
 
         <div className="container mx-auto max-w-4xl relative z-10">
           <div className="text-center mb-12">
-            <Skeleton className="h-6 w-32 mx-auto mb-6 rounded-full" />
-            <Skeleton className="h-12 md:h-16 lg:h-20 w-full max-w-lg mx-auto mb-6" />
-            <Skeleton className="h-8 w-64 mx-auto" />
+            <Skeleton className="h-6 w-32 mx-auto mb-6 rounded-full" aria-hidden="true" />
+            <Skeleton
+              className="h-12 md:h-16 lg:h-20 w-full max-w-lg mx-auto mb-6"
+              aria-hidden="true"
+            />
+            <Skeleton className="h-8 w-64 mx-auto" aria-hidden="true" />
           </div>
         </div>
       </section>
@@ -20,13 +33,13 @@ export default function Loading() {
         <div className="container mx-auto max-w-4xl">
           <Card className="p-8 md:p-12 border border-primary/10">
             <div className="space-y-6">
-              <Skeleton className="h-6 w-full" />
-              <Skeleton className="h-6 w-full" />
-              <Skeleton className="h-6 w-3/4" />
-              <Skeleton className="h-6 w-full" />
-              <Skeleton className="h-6 w-full" />
-              <Skeleton className="h-6 w-5/6" />
-              <Skeleton className="h-10 w-96 mx-auto mt-12" />
+              <Skeleton className="h-6 w-full" aria-hidden="true" />
+              <Skeleton className="h-6 w-full" aria-hidden="true" />
+              <Skeleton className="h-6 w-3/4" aria-hidden="true" />
+              <Skeleton className="h-6 w-full" aria-hidden="true" />
+              <Skeleton className="h-6 w-full" aria-hidden="true" />
+              <Skeleton className="h-6 w-5/6" aria-hidden="true" />
+              <Skeleton className="h-10 w-96 mx-auto mt-12" aria-hidden="true" />
             </div>
           </Card>
         </div>
@@ -38,10 +51,10 @@ export default function Loading() {
             {[1, 2, 3].map(i => (
               <Card key={i} className="p-8 border border-primary/10">
                 <div className="text-center">
-                  <Skeleton className="h-16 w-16 mx-auto mb-4 rounded-full" />
-                  <Skeleton className="h-6 w-32 mx-auto mb-3" />
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-3/4 mx-auto" />
+                  <Skeleton className="h-16 w-16 mx-auto mb-4 rounded-full" aria-hidden="true" />
+                  <Skeleton className="h-6 w-32 mx-auto mb-3" aria-hidden="true" />
+                  <Skeleton className="h-4 w-full" aria-hidden="true" />
+                  <Skeleton className="h-4 w-3/4 mx-auto" aria-hidden="true" />
                 </div>
               </Card>
             ))}

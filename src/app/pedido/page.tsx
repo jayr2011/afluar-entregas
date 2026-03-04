@@ -1,8 +1,17 @@
 export default function Pedido() {
+  const heroId = 'pedido-hero'
+
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-4xl font-bold mb-4">Página de Pedido</h1>
-      <p className="text-lg text-gray-600">Aqui você pode acompanhar seu pedido.</p>
-    </div>
+    <main aria-labelledby={heroId} className="min-h-screen">
+      <section
+        aria-labelledby={heroId}
+        className="flex min-h-screen flex-col items-center justify-center px-6 text-center"
+      >
+        <h1 id={heroId} className="mb-4 text-4xl font-bold">
+          Página de Pedido
+        </h1>
+        <p className="text-lg text-gray-600">Aqui você pode acompanhar seu pedido.</p>
+      </section>
+    </main>
   )
 }

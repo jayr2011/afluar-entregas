@@ -12,7 +12,7 @@ function CheckoutSucessoContent() {
   const pedidoId = searchParams.get('pedido')
 
   return (
-    <div className="min-h-screen flex flex-col bg-linear-to-b from-background to-primary/5 px-4 py-8">
+    <main className="min-h-screen flex flex-col bg-linear-to-b from-background to-primary/5 px-4 py-8">
       <div className="container max-w-md w-full mb-8">
         <CheckoutBreadcrumb currentStep="pagamento" />
       </div>
@@ -34,7 +34,7 @@ function CheckoutSucessoContent() {
           </Button>
         </div>
       </div>
-    </div>
+    </main>
   )
 }
 
@@ -42,9 +42,14 @@ export default function CheckoutSucessoPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-linear-to-b from-background to-primary/5">
+        <main
+          className="min-h-screen flex items-center justify-center bg-linear-to-b from-background to-primary/5"
+          role="status"
+          aria-live="polite"
+        >
+          <p className="sr-only">Carregando confirmação do pedido...</p>
           <div className="h-20 w-20 rounded-full bg-primary/10 animate-pulse" />
-        </div>
+        </main>
       }
     >
       <CheckoutSucessoContent />

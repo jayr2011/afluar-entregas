@@ -34,19 +34,32 @@ export const metadata: Metadata = {
 }
 
 export default function Experiencia() {
+  const heroId = 'experiencia-hero'
+  const historiaId = 'experiencia-historia'
+  const pilaresId = 'experiencia-pilares'
+
   return (
-    <div className="min-h-screen bg-linear-to-b from-background to-primary/5">
-      <section className="relative py-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-primary/5 -skew-y-3 transform origin-top-left"></div>
+    <main
+      className="min-h-screen bg-linear-to-b from-background to-primary/5"
+      aria-labelledby={heroId}
+    >
+      <section aria-labelledby={heroId} className="relative py-20 px-4 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-primary/5 -skew-y-3 transform origin-top-left"
+          aria-hidden="true"
+        ></div>
 
         <div className="container mx-auto max-w-4xl relative z-10">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <Sparkles className="h-4 w-4" />
+              <Sparkles className="h-4 w-4" aria-hidden="true" />
               Nossa História
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight">
+            <h1
+              id={heroId}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight"
+            >
               Onde o Rio encontra o Requinte
             </h1>
 
@@ -57,10 +70,13 @@ export default function Experiencia() {
         </div>
       </section>
 
-      <section className="py-16 px-4">
+      <section aria-labelledby={historiaId} className="py-16 px-4">
         <div className="container mx-auto max-w-4xl">
           <div className="bg-card rounded-2xl shadow-xl p-8 md:p-12 border border-primary/10">
             <div className="prose prose-lg max-w-none">
+              <h2 id={historiaId} className="sr-only">
+                História do Afluar
+              </h2>
               <p className="text-lg md:text-xl text-foreground/90 leading-relaxed mb-6">
                 Existe uma Belém que não está nos mapas, mas no paladar. No Afluar, nós não servimos
                 pratos; nós{' '}
@@ -92,12 +108,18 @@ export default function Experiencia() {
         </div>
       </section>
 
-      <section className="py-16 px-4 bg-primary/5">
+      <section aria-labelledby={pilaresId} className="py-16 px-4 bg-primary/5">
         <div className="container mx-auto max-w-6xl">
+          <h2 id={pilaresId} className="sr-only">
+            Pilares da experiência
+          </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-card p-8 rounded-xl shadow-lg text-center border border-primary/10 hover:shadow-xl transition-shadow">
-              <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Waves className="h-8 w-8 text-primary" />
+              <div
+                className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4"
+                aria-hidden="true"
+              >
+                <Waves className="h-8 w-8 text-primary" aria-hidden="true" />
               </div>
               <h3 className="text-xl font-bold text-primary mb-3">Da Amazônia</h3>
               <p className="text-muted-foreground">
@@ -106,8 +128,11 @@ export default function Experiencia() {
             </div>
 
             <div className="bg-card p-8 rounded-xl shadow-lg text-center border border-primary/10 hover:shadow-xl transition-shadow">
-              <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <UtensilsCrossed className="h-8 w-8 text-primary" />
+              <div
+                className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4"
+                aria-hidden="true"
+              >
+                <UtensilsCrossed className="h-8 w-8 text-primary" aria-hidden="true" />
               </div>
               <h3 className="text-xl font-bold text-primary mb-3">Alta Gastronomia</h3>
               <p className="text-muted-foreground">
@@ -116,8 +141,11 @@ export default function Experiencia() {
             </div>
 
             <div className="bg-card p-8 rounded-xl shadow-lg text-center border border-primary/10 hover:shadow-xl transition-shadow">
-              <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Leaf className="h-8 w-8 text-primary" />
+              <div
+                className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4"
+                aria-hidden="true"
+              >
+                <Leaf className="h-8 w-8 text-primary" aria-hidden="true" />
               </div>
               <h3 className="text-xl font-bold text-primary mb-3">Experiência Única</h3>
               <p className="text-muted-foreground">
@@ -127,6 +155,6 @@ export default function Experiencia() {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   )
 }

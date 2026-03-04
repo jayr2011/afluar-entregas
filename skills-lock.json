@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "security-best-practices": {
+      "source": "supercent-io/skills-template",
+      "sourceType": "github",
+      "computedHash": "4647247fd17c7a3a48605fa5c935915295dcb9a3dcf5c9ba5209194bffbf6993"
+    }
+  }
+}

@@ -93,26 +93,46 @@ const diferenciais = [
 
 export default async function Eventos() {
   const enabled = await isFeatureEnabled('eventos_enabled')
+  const heroId = 'eventos-hero'
+  const tiposId = 'eventos-tipos'
+  const diferenciaisId = 'eventos-diferenciais'
+  const vistaId = 'eventos-vista'
+  const ctaId = 'eventos-cta'
 
   if (!enabled) {
     notFound()
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-background to-primary/5">
-      <section className="relative py-24 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-primary/5 -skew-y-3 transform origin-top-left"></div>
-        <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+    <main
+      className="min-h-screen bg-linear-to-b from-background to-primary/5"
+      aria-labelledby={heroId}
+    >
+      <section aria-labelledby={heroId} className="relative py-24 px-4 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-primary/5 -skew-y-3 transform origin-top-left"
+          aria-hidden="true"
+        ></div>
+        <div
+          className="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"
+          aria-hidden="true"
+        ></div>
+        <div
+          className="absolute bottom-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+          aria-hidden="true"
+        ></div>
 
         <div className="container mx-auto max-w-6xl relative z-10">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <Calendar className="h-4 w-4" />
+              <Calendar className="h-4 w-4" aria-hidden="true" />
               Eventos Especiais
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight">
+            <h1
+              id={heroId}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight"
+            >
               Seu Momento Perfeito
               <br />
               <span className="text-foreground">Com Vista Para o Paraíso</span>
@@ -139,10 +159,10 @@ export default async function Eventos() {
         </div>
       </section>
 
-      <section className="py-16 px-4 bg-primary/5">
+      <section aria-labelledby={tiposId} className="py-16 px-4 bg-primary/5">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+            <h2 id={tiposId} className="text-3xl md:text-4xl font-bold text-primary mb-4">
               Eventos Que Realizamos
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -151,11 +171,11 @@ export default async function Eventos() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {tiposEventos.map((evento, index) => {
+            {tiposEventos.map(evento => {
               const Icon = evento.icon
               return (
                 <div
-                  key={index}
+                  key={evento.titulo}
                   className={`bg-card rounded-2xl p-8 border hover:shadow-xl transition-all duration-300 group ${
                     evento.destaque ? 'border-primary shadow-lg' : 'border-primary/10'
                   }`}
@@ -167,8 +187,9 @@ export default async function Eventos() {
                           ? 'bg-primary text-primary-foreground'
                           : 'bg-primary/10 text-primary'
                       }`}
+                      aria-hidden="true"
                     >
-                      <Icon className="h-7 w-7" />
+                      <Icon className="h-7 w-7" aria-hidden="true" />
                     </div>
 
                     <div className="flex-1">
@@ -188,10 +209,10 @@ export default async function Eventos() {
         </div>
       </section>
 
-      <section className="py-16 px-4">
+      <section aria-labelledby={diferenciaisId} className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+            <h2 id={diferenciaisId} className="text-3xl md:text-4xl font-bold text-primary mb-4">
               Por Que Escolher o Afluar?
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -200,15 +221,21 @@ export default async function Eventos() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {diferenciais.map((item, index) => {
+            {diferenciais.map(item => {
               const Icon = item.icon
               return (
                 <div
-                  key={index}
+                  key={item.titulo}
                   className="bg-card rounded-xl p-6 border border-primary/10 hover:border-primary/30 hover:shadow-lg transition-all duration-300 text-center group"
                 >
-                  <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:scale-110 transition-all">
-                    <Icon className="h-8 w-8 text-primary group-hover:text-primary-foreground transition-colors" />
+                  <div
+                    className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:scale-110 transition-all"
+                    aria-hidden="true"
+                  >
+                    <Icon
+                      className="h-8 w-8 text-primary group-hover:text-primary-foreground transition-colors"
+                      aria-hidden="true"
+                    />
                   </div>
                   <h3 className="text-lg font-bold text-foreground mb-2">{item.titulo}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{item.descricao}</p>
@@ -219,13 +246,16 @@ export default async function Eventos() {
         </div>
       </section>
 
-      <section className="py-20 px-4 bg-linear-to-br from-primary/10 via-primary/5 to-background">
+      <section
+        aria-labelledby={vistaId}
+        className="py-20 px-4 bg-linear-to-br from-primary/10 via-primary/5 to-background"
+      >
         <div className="container mx-auto max-w-4xl">
           <div className="bg-card rounded-3xl shadow-2xl overflow-hidden border border-primary/20">
             <div className="p-8 md:p-12 text-center">
-              <MapPin className="h-16 w-16 text-primary mx-auto mb-6" />
+              <MapPin className="h-16 w-16 text-primary mx-auto mb-6" aria-hidden="true" />
 
-              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
+              <h2 id={vistaId} className="text-3xl md:text-4xl font-bold text-primary mb-6">
                 A Vista Mais Privilegiada de Belém
               </h2>
 
@@ -256,11 +286,11 @@ export default async function Eventos() {
         </div>
       </section>
 
-      <section className="py-16 px-4">
+      <section aria-labelledby={ctaId} className="py-16 px-4">
         <div className="container mx-auto max-w-4xl text-center">
-          <Sparkles className="h-12 w-12 text-primary mx-auto mb-6" />
+          <Sparkles className="h-12 w-12 text-primary mx-auto mb-6" aria-hidden="true" />
 
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+          <h2 id={ctaId} className="text-3xl md:text-4xl font-bold text-primary mb-4">
             Pronto Para Criar Memórias Inesquecíveis?
           </h2>
 
@@ -278,6 +308,6 @@ export default async function Eventos() {
           </Button>
         </div>
       </section>
-    </div>
+    </main>
   )
 }

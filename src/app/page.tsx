@@ -49,7 +49,7 @@ export default async function Home() {
   const latestPost = blog_enabled ? (await getCachedPosts({ page: 1, limit: 1 })).posts[0] : null
 
   return (
-    <div className="w-full -mt-px">
+    <main className="w-full -mt-px">
       <h1 className="sr-only">Afluar - Restaurante de Culinária Amazônica</h1>
       <HomeBanner />
       <h2 className="text-center text-xl font-semibold mt-6 mb-2">Use nosso acesso rápido</h2>
@@ -63,7 +63,11 @@ export default async function Home() {
         <section className="container mx-auto max-w-6xl px-4 pb-8 pt-4">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-xl font-semibold">Último post do blog</h2>
-            <Link href="/blog" className="text-sm font-medium text-primary hover:underline">
+            <Link
+              href="/blog"
+              className="text-sm font-medium text-primary hover:underline"
+              aria-label="Ver todos os posts do blog"
+            >
               Ver todos
             </Link>
           </div>
@@ -77,6 +81,6 @@ export default async function Home() {
           )}
         </section>
       ) : null}
-    </div>
+    </main>
   )
 }

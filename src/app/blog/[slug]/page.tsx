@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 function BlogPostPageFallback() {
   return (
-    <article className="container mx-auto max-w-4xl px-4 py-8">
+    <main aria-label="Carregando post do blog" className="container mx-auto max-w-4xl px-4 py-8">
       <div className="mb-8 h-6 w-36 rounded bg-muted" />
       <div className="mb-6 h-12 w-11/12 rounded bg-muted" />
       <div className="mb-8 h-88 w-full rounded-xl bg-muted" />
@@ -52,7 +52,7 @@ function BlogPostPageFallback() {
         <div className="h-4 w-10/12 rounded bg-muted" />
         <div className="h-4 w-9/12 rounded bg-muted" />
       </div>
-    </article>
+    </main>
   )
 }
 
@@ -65,76 +65,81 @@ async function BlogPostPageContent({ params }: PageProps) {
   }
 
   const { posts } = await getCachedPosts({ limit: 3, category: post.categories?.[0]?.slug })
+  const heroId = `blog-post-title-${post.id}`
 
   return (
-    <article className="container mx-auto max-w-4xl px-4 py-8">
-      <PostViewTracker postId={post.id} />
+    <main aria-labelledby={heroId} className="container mx-auto max-w-4xl px-4 py-8">
+      <article>
+        <PostViewTracker postId={post.id} />
 
-      <header className="mb-8">
-        <div className="flex gap-2 mb-4">
-          {post.categories?.map(cat => (
+        <header className="mb-8">
+          <div className="flex gap-2 mb-4">
+            {post.categories?.map(cat => (
+              <Link
+                key={cat.id}
+                href={`/blog/categoria/${cat.slug}`}
+                className="text-sm font-medium text-primary hover:underline"
+              >
+                {cat.name}
+              </Link>
+            ))}
+          </div>
+
+          <h1 id={heroId} className="text-4xl md:text-5xl font-bold mb-4">
+            {post.title}
+          </h1>
+
+          <div className="flex items-center gap-4 text-muted-foreground mb-6">
+            <time dateTime={post.published_at}>
+              {post.published_at &&
+                format(new Date(post.published_at), "d 'de' MMMM 'de' yyyy", { locale: ptBR })}
+            </time>
+            <span>•</span>
+            <span>{post.view_count} visualizações</span>
+          </div>
+
+          {post.cover_image && (
+            <div className="relative w-full h-100 mb-8 rounded-xl overflow-hidden">
+              <Image
+                src={post.cover_image}
+                alt={post.title}
+                fill
+                className="object-cover"
+                priority
+                sizes="100vw"
+              />
+            </div>
+          )}
+        </header>
+
+        <div className="prose prose-lg max-w-none mb-12">
+          <div dangerouslySetInnerHTML={{ __html: post.content }} />
+        </div>
+
+        <div className="flex flex-wrap gap-2 mb-8">
+          {post.tags?.map(tag => (
             <Link
-              key={cat.id}
-              href={`/blog/categoria/${cat.slug}`}
-              className="text-sm font-medium text-primary hover:underline"
+              key={tag.id}
+              href={`/blog/tag/${tag.slug}`}
+              className="px-3 py-1 bg-secondary rounded-full text-sm hover:bg-secondary/80"
             >
-              {cat.name}
+              #{tag.name}
             </Link>
           ))}
         </div>
 
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">{post.title}</h1>
+        <ShareButtons title={post.title} url={`/blog/${post.slug}`} />
 
-        <div className="flex items-center gap-4 text-muted-foreground mb-6">
-          <time dateTime={post.published_at}>
-            {post.published_at &&
-              format(new Date(post.published_at), "d 'de' MMMM 'de' yyyy", { locale: ptBR })}
-          </time>
-          <span>•</span>
-          <span>{post.view_count} visualizações</span>
-        </div>
+        <hr className="my-12" />
 
-        {post.cover_image && (
-          <div className="relative w-full h-100 mb-8 rounded-xl overflow-hidden">
-            <Image
-              src={post.cover_image}
-              alt={post.title}
-              fill
-              className="object-cover"
-              priority
-              sizes="100vw"
-            />
-          </div>
-        )}
-      </header>
+        <CommentSection postId={post.id} />
 
-      <div className="prose prose-lg max-w-none mb-12">
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
-      </div>
-
-      <div className="flex flex-wrap gap-2 mb-8">
-        {post.tags?.map(tag => (
-          <Link
-            key={tag.id}
-            href={`/blog/tag/${tag.slug}`}
-            className="px-3 py-1 bg-secondary rounded-full text-sm hover:bg-secondary/80"
-          >
-            #{tag.name}
-          </Link>
-        ))}
-      </div>
-
-      <ShareButtons title={post.title} url={`/blog/${post.slug}`} />
-
-      <hr className="my-12" />
-
-      <CommentSection postId={post.id} />
-
-      <RelatedPosts
-        currentPostId={post.id}
-        posts={posts.filter(p => p.id !== post.id).slice(0, 3)}
-      />
-    </article>
+        <RelatedPosts
+          currentPostId={post.id}
+          posts={posts.filter(p => p.id !== post.id).slice(0, 3)}
+        />
+      </article>
+    </main>
   )
 }
 
