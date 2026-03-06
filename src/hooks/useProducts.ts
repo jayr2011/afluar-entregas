@@ -66,20 +66,22 @@ export function useProduct(id: string | null | undefined): {
 } {
   const cached = useProductsStore(state => (id ? state.products.get(id) : undefined))
   const setProduct = useProductsStore(state => state.setProduct)
-  const [produto, setProduto] = useState<Produto | null>(cached ?? null)
+  const [fetchedProduto, setFetchedProduto] = useState<Produto | null>(null)
   const [loading, setLoading] = useState(!!id && !cached)
   const [error, setError] = useState<string | null>(null)
+
+  const produto = !id ? null : (cached ?? fetchedProduto)
 
   const fetchProduto = useCallback(
     async (signal?: AbortSignal) => {
       if (!id) {
-        setProduto(null)
+        setFetchedProduto(null)
         setLoading(false)
         return
       }
       const fromCache = useProductsStore.getState().getProductById(id)
       if (fromCache) {
-        setProduto(fromCache)
+        setFetchedProduto(fromCache)
         setLoading(false)
         return
       }
@@ -92,12 +94,12 @@ export function useProduct(id: string | null | undefined): {
           throw new Error('Erro ao carregar produto')
         }
         const data = await response.json()
-        setProduto(data)
+        setFetchedProduto(data)
         setProduct(data)
       } catch (err) {
         if (err instanceof Error && err.name === 'AbortError') return
         setError(err instanceof Error ? err.message : 'Não foi possível carregar o produto.')
-        setProduto(null)
+        setFetchedProduto(null)
       } finally {
         if (!signal?.aborted) setLoading(false)
       }
@@ -107,17 +109,16 @@ export function useProduct(id: string | null | undefined): {
 
   useEffect(() => {
     if (!id) {
-      setProduto(null)
+      setFetchedProduto(null)
       setLoading(false)
       return
     }
     if (cached) {
-      setProduto(cached)
       setLoading(false)
       return
     }
     const controller = new AbortController()
-    setProduto(null)
+    setFetchedProduto(null)
     fetchProduto(controller.signal)
     return () => controller.abort()
   }, [id, cached?.id, fetchProduto])

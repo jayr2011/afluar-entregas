@@ -66,7 +66,7 @@ const informacoesAdicionais = [
   {
     icon: Clock,
     titulo: 'Horário de Funcionamento',
-    descricao: 'Seg a Dom: 11h às 23h',
+    descricao: 'Sexta a Domingo: 11h às 23h',
     link: null,
     isExternal: false,
   },

@@ -1,12 +1,11 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { ProductCard } from '@/components/product-card/ProductCard'
 import { Plus, ChevronDown, Filter } from 'lucide-react'
 import type { Produto } from '@/types/produtos'
 import { useCartStore } from '@/store/cartStore'
-import { useProductsStore } from '@/store/productsStore'
 import { showAddToCartToast } from '@/components/add-to-cart-sonner/AddToCartSonnerComponent'
 import { CATEGORIAS_CARDAPIO, produtoNaCategoria, type SlugCategoria } from './categorias'
 import { cn } from '@/lib/utils'
@@ -19,17 +18,12 @@ interface CardapioGridProps {
 
 export function CardapioGrid({ produtos, checkoutEnabled }: CardapioGridProps) {
   const addProduct = useCartStore(state => state.addProduct)
-  const setProducts = useProductsStore(state => state.setProducts)
   const [filtroSelecionado, setFiltroSelecionado] = useState<SlugCategoria | 'destaques' | null>(
     null
   )
   const [filtrosAbertos, setFiltrosAbertos] = useState(false)
 
   const produtosRealtime = useRealtimeProdutos(produtos)
-
-  useEffect(() => {
-    setProducts(produtosRealtime)
-  }, [produtosRealtime, setProducts])
 
   const produtosFiltrados = useMemo(() => {
     if (!filtroSelecionado) return produtosRealtime
